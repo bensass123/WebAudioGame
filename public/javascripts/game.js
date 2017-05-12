@@ -5,7 +5,7 @@ var corrects = 0;
 // data
 // collective soul - shine
 var yeahs = [
-    41.5, 48, 118, 125
+    41.5, 48, 118, 125, 208, 215
 ];
 
 var whoahs = [
