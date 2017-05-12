@@ -77,9 +77,12 @@ function gotOne() {
 
 function missedOne() {
     shakeGame();
-    $('body').addClass('wrong');
     clearInterval(gradientInterval);
-    $('#game').css('background', 'orange');
+    setTimeout(()=>{
+        $('body').addClass('wrong');
+        $('#game').css('background', 'orange');
+    }, 600)
+    
 }
 
 function win(){
