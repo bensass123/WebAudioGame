@@ -2,6 +2,31 @@
 var gradientInterval;
 var corrects = 0;
 
+// data
+// collective soul - shine
+var yeahs = [
+    41.5, 48, 118, 125
+];
+
+var whoahs = [
+    52, 58, 64, 72, 129, 135, 142, 148
+];
+
+
+function checkCurrentTime(time) {
+
+    var actualTime = time - timeToLoad;
+
+    for (i in yeahs) {
+        if ( (yeahs[i] - 1.5) <= actualTime && actualTime <= (yeahs[i] + 1.5) ){
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
 function createYeahButton() {
     var b = $('<button/>',{
         text: 'Yeah',
@@ -10,11 +35,12 @@ function createYeahButton() {
         click: function () {
             let time = context.currentTime;
             //yeah is between 43.5-45.5 and also 50-52
-            if ((time >= 43.5 && time <= 45.5) || (time >= 50 && time <= 52)) {
+            if (checkCurrentTime(time)) {
                 gotOne();
                 corrects++;
-                if (corrects > 1) {
+                if (corrects >= 4) {
                     console.log('you win!');
+                    win();
                 }
                 
                 console.log('good');

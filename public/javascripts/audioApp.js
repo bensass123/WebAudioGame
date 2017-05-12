@@ -1,8 +1,14 @@
 window.onload = init;
 var context, source1, source2;
-var bufferLoader;
+var bufferLoader, t0, t1, timeToLoad;
+
+
 
 function init() {
+  // start initial timer
+  t0 = performance.now();
+
+
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
     context = new AudioContext();
 
@@ -26,6 +32,12 @@ function finishedLoading(bufferList) {
 
     source1.connect(context.destination);
     source2.connect(context.destination);
+
+    //end initial timer
+    var t1 = performance.now();
+    console.log('time diff:');
+    console.log(t1-t0);
+    timeToLoad = ((t1-t0)/1000);
     source1.start(0);
     // source2.start(0);
 }
