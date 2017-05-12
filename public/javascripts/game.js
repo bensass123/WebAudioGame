@@ -1,12 +1,12 @@
 // game logic
-
+var gradientInterval;
 var corrects = 0;
 
 function createYeahButton() {
     var b = $('<button/>',{
         text: 'Yeah',
         id: 'yeahBtn',
-        class: 'btn-lg',
+        class: 'btn-sm',
         click: function () {
             let time = context.currentTime;
             //yeah is between 43.5-45.5 and also 50-52
@@ -45,9 +45,42 @@ function createStopButton() {
 createStopButton();
 
 function gotOne() {
-    setInterval(updateGradient,6);
+    $('body').removeClass('wrong');
+     gradientInterval = setInterval(updateGradient,1);
 }
 
 function missedOne() {
+    shakeGame();
     $('body').addClass('wrong');
+    clearInterval(gradientInterval);
+    $('#game').css('background', 'orange');
+}
+
+function win(){
+    //make game div transparent
+    $('#game').css('opacity', '0.5');
+    clearInterval(gradientInterval);
+    gradientInterval = setInterval(updateGradient,1);
+    //method from strobe.js to strobe
+    strobe();
+}
+
+function createToggleButton() {
+    var b = $('<button/>',{
+        text: 'Toggle',
+        id: 'toggleBtn',
+        class: 'btn-lg',
+        click: function () {
+            toggleContextState();
+        }
+    } )
+    $('#game').append(b);
+}
+
+function shakeGame() {
+     $('body').addClass('noScroll');
+    $("#game").effect( "shake" );
+    setTimeout(()=>{
+        $('body').removeClass('noScroll');},
+        800);
 }

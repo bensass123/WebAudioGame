@@ -39,6 +39,49 @@ function playSound(buffer, time) {
   source.start(time);
 }
 
+function toggleContextState() {
+  if(context.state === 'running') {
+    context.suspend().then(function() {
+      $('#toggleBtn').text('Resume context');
+    });
+  } else if(context.state === 'suspended') {
+    context.resume().then(function() {
+      $('#toggleBtn').text('Suspend context');
+    });  
+  }
+}
+
+// shows current time - context
+
+function updateWithTime() {
+    var p = $('<p/>',{
+        text: '0 secs',
+        id: 'time'
+    });
+    $('#game').append(p);
+}
+
+// updateWithTime();
+
+
+
+// function thisTimer() {
+//     setInterval(500, function(){
+//         console.log('tick');
+//         $('#time').text(context.currentTime);
+//         timer();
+//     });
+    
+// }
+
+// function doit(){
+//     console.log('tick');
+//     $('#time').text(context.currentTime);
+// }
+
+// setInterval(doit, 500);
+
+// thisTimer();
 
 
 
