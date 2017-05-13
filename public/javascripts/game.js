@@ -13,12 +13,26 @@ var whoahs = [
 ];
 
 
-function checkCurrentTime(time) {
+function checkCurrentTimeYeahs(time) {
 
     var actualTime = time - timeToLoad;
 
     for (i in yeahs) {
         if ( (yeahs[i] - 1.5) <= actualTime && actualTime <= (yeahs[i] + 1.5) ){
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function checkCurrentTimeWhoahs(time) {
+
+    var actualTime = time - timeToLoad;
+    console.log(actualTime);
+
+    for (i in whoahs) {
+        if ( (whoahs[i] - 1.5) <= actualTime && actualTime <= (whoahs[i] + 1.5) ){
             return true;
         }
     }
@@ -35,7 +49,7 @@ function createYeahButton() {
         click: function () {
             let time = context.currentTime;
             //yeah is between 43.5-45.5 and also 50-52
-            if (checkCurrentTime(time)) {
+            if (checkCurrentTimeYeahs(time)) {
                 gotOne();
                 corrects++;
                 if (corrects >= 4) {
@@ -55,6 +69,36 @@ function createYeahButton() {
 }
 
 createYeahButton();
+
+
+function createWhoah() {
+    var b = $('<button/>',{
+        text: 'Whoah',
+        id: 'whoahBtn',
+        class: 'btn-sm',
+        click: function () {
+            let time = context.currentTime;
+            //yeah is between 43.5-45.5 and also 50-52
+            if (checkCurrentTimeWhoahs(time)) {
+                gotOne();
+                corrects++;
+                if (corrects >= 4) {
+                    console.log('you win!');
+                    win();
+                }
+                
+                console.log('good');
+            } else {
+                missedOne();
+                console.log('lose');
+            }
+            
+        }
+    } )
+    $('#game').append(b);
+}
+
+createWhoah();
 
 function createStopButton() {
     var b = $('<button/>',{

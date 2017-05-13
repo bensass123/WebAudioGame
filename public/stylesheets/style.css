@@ -55,3 +55,12 @@ a {
 .noScroll {
   overflow: hidden;
 }
+
+#whoahBtn {
+    position: absolute;
+    left: 536px;
+    top: 183px;
+    background: purple;
+    color: white;
+    font-weight: 600;
+}
